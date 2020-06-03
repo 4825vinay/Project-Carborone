@@ -213,7 +213,6 @@
     </gazebo>
 
     <!--Add skid steer plugin for controlling the bot -->
-    <!--
     <gazebo>
         <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
             <updateRate>30.0</updateRate>
@@ -224,7 +223,7 @@
             <rightRearJoint>right_back_wheel_joint</rightRearJoint>
             <wheelSeparation>0.2</wheelSeparation>
             <wheelDiameter>0.05</wheelDiameter>
-            <robotBaseFrame>camera_link</robotBaseFrame>
+            <robotBaseFrame>base_link</robotBaseFrame>
             <commandTopic>cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>            
@@ -233,7 +232,6 @@
             <torque>20</torque>
         </plugin>
     </gazebo>
-    -->
 
     <!--Add a microsoft Kinect as a depth cam-->
     <!--Check frameName having problems if it is camera_link-->
@@ -263,7 +261,7 @@
         <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
         <depthImageInfoTopicName>/camera/depth/camera_info</depthImageInfoTopicName>
         <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
-        <frameName>base_link</frameName>
+        <frameName>camera_link</frameName>
         <pointCloudCutoff>0.5</pointCloudCutoff>
         <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
         <distortionK1>0.00000001</distortionK1>
@@ -291,8 +289,8 @@
             <horizontal>
                 <samples>720</samples>
                 <resolution>1</resolution>
-                <min_angle>-1.570796</min_angle>
-                <max_angle>1.570796</max_angle>
+                <min_angle>0</min_angle>
+                <max_angle>6.2830</max_angle>
             </horizontal>
             </scan>
             <range>
@@ -323,6 +321,14 @@
         <frameName>world</frameName>
         <bodyName>base_link</bodyName>
         <topicName>odom</topicName>
+        <updateRate>30.0</updateRate>
+        </plugin>
+    </gazebo>
+
+    <!-- Joint state publisher-->
+    <gazebo>
+        <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+        <jointName>left_front_wheel_joint, left_back_wheel_joint, right_front_wheel_joint, right_back_wheel_joint</jointName>
         <updateRate>30.0</updateRate>
         </plugin>
     </gazebo>
