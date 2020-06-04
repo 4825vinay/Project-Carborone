@@ -1,0 +1,12 @@
+<launch>
+
+    <!--Launch empty gazebo model-->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>	
+    <param name="robot_description" textfile="$(find car_description)/urdf/base.urdf"/>
+    <rosparam file="$(find car_controls)/config/controllers.yaml" command="load"/>
+    <node name="control_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/car" args="--namespace=/car joint_state_controller left_front_wheel_controller left_back_wheel_controller right_front_wheel_controller right_back_wheel_controller"/>
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model base"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="/joint_states" to="/car/joint_states"/>
+    </node>
+</launch>
