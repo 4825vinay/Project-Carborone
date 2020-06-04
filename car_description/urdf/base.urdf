@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="diffBase">
+<robot name="car">
     <link name="base_link">
         <visual>
             <geometry>
@@ -17,9 +17,30 @@
             <inertial>
                 <mass value="1"/>
                 <inertia ixx="0.0077" ixy="0" ixz="0" iyy="0.010" iyz="0" izz="0.003"/>
-            </inertial>
-                   
+            </inertial>                   
     </link>
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                <box size = "0.3 0.2 0.05"/>
+            </geometry>
+            <material name="white">
+                <color rgba = "1 1 1 1"/>
+            </material>
+        </visual>
+            <collision>
+                <geometry>
+                    <box size = "0.3 0.2 0.05"/>
+                </geometry>
+            </collision>                
+    </link>
+    
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link = "base_link"/>
+        <child link = "base_footprint"/>
+        <origin xyz="0 0 0" rpy = "0 0 0 "/>
+    </joint>
+
 
     <link name="left_front_wheel">
         <visual>
@@ -47,6 +68,7 @@
         <parent link="base_link"/>
         <child link = "left_front_wheel"/>
         <origin xyz="0.1 0.125 0" rpy="-1.57075 0 0"/>
+        
     </joint>
 
     <link name="left_back_wheel">
@@ -76,6 +98,7 @@
         <parent link="base_link"/>
         <child link = "left_back_wheel"/>
         <origin xyz="-0.1 0.125 0" rpy="-1.57075 0 0"/>
+        
     </joint>
 
     <link name="right_front_wheel">
@@ -105,6 +128,7 @@
         <parent link="base_link"/>
         <child link = "right_front_wheel"/>
         <origin xyz="0.1 -0.125 0" rpy="1.57075 0 0"/>
+        
     </joint>
 
     <link name="right_back_wheel">
@@ -134,6 +158,7 @@
         <parent link="base_link"/>
         <child link = "right_back_wheel"/>
         <origin xyz="-0.1 -0.125 0" rpy="1.57075 0 0"/>
+        
     </joint>
 
     <link name = "camera_link">
@@ -183,13 +208,56 @@
         <origin rpy="0 0 0" xyz="0 0 0.075"/>
     </joint>
 
-
+    <!-- add transmission joints-->    
+    <transmission name="right_back_wheel_joint_transmission">
+            <type>transmission_interface/SimpleTrnasmission</type>
+            <joint name="right_back_wheel_joint">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+                <actuator name="right_back_wheel_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    <transmission name="right_front_wheel_joint_transmission">
+            <type>transmission_interface/SimpleTrnasmission</type>
+            <joint name="right_front_wheel_joint">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="right_front_wheel_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    <transmission name="left_back_wheel_joint_transmission">
+            <type>transmission_interface/SimpleTrnasmission</type>
+            <joint name="left_back_wheel_joint">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="left_back_wheel_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    <transmission name="left_front_wheel_joint_transmission">
+        <type>transmission_interface/SimpleTrnasmission</type>
+        <joint name="left_front_wheel_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_front_wheel_motor">
+            <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    
 <!-- ********************* All Gazebo plugins appear beoyond this *****************************-->
+    <!--
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace></robotNamespace>
+            <robotNamespace>/car</robotNamespace>
         </plugin>
     </gazebo>
+    -->
     <gazebo reference="base_link">
         <material>Gazebo/White</material>
     </gazebo>
@@ -213,6 +281,7 @@
     </gazebo>
 
     <!--Add skid steer plugin for controlling the bot -->
+    <!--
     <gazebo>
         <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
             <updateRate>30.0</updateRate>
@@ -232,7 +301,7 @@
             <torque>20</torque>
         </plugin>
     </gazebo>
-
+    -->
     <!--Add a microsoft Kinect as a depth cam-->
     <!--Check frameName having problems if it is camera_link-->
 
@@ -326,12 +395,14 @@
     </gazebo>
 
     <!-- Joint state publisher-->
+    <!--
     <gazebo>
         <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
         <jointName>left_front_wheel_joint, left_back_wheel_joint, right_front_wheel_joint, right_back_wheel_joint</jointName>
         <updateRate>30.0</updateRate>
         </plugin>
     </gazebo>
+    -->
 </robot>
 
 
