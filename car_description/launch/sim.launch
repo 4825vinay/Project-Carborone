@@ -1,6 +1,7 @@
 <launch>
     <param name="robot_description" textfile="$(find car_description)/urdf/base.urdf"/>
     <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
-    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model base"/>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model base"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find car_description)/config/config.rviz"/> 
 </launch>
