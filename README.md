@@ -1,6 +1,6 @@
-<<<<<<< HEAD
-# Carborone
-Carborone Project Repository
+
+# Project---Carborone
+An Autonomous flying car with Deep learning based landing and take off abilities
 
 # Instructions 
 1. Install python-catkin-tools using
@@ -30,12 +30,3 @@ Carborone Project Repository
 
 # Package 
 At present the package contains URDF regarding the base of the bot
-
-
-
-
-
-=======
-# Project---Carborone
-An Autonomous flying car with Deep learning based landing and take off abilities
->>>>>>> 78317a6085495e48e405707dc66ccfa1f9750c9a
