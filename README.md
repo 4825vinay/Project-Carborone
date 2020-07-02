@@ -18,7 +18,7 @@ An Autonomous flying car with Deep learning based landing and take off abilities
     2. Clone the repository
 
         ```
-        git clone https://github.com/SuhrudhSarathy/carborone.git
+        git clone https://github.com/4825vinay/Project-Carborone.git
         ```
 
     3. Go to workspace 
