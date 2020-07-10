@@ -1,6 +1,7 @@
 
 # Project---Carborone
 An Autonomous flying car with Deep learning based landing and take off abilities
+(Project under progress)
 
 # Instructions 
 1. Install python-catkin-tools using
@@ -27,6 +28,12 @@ An Autonomous flying car with Deep learning based landing and take off abilities
         cd ..
         catkin build
         ```
+3. To use the robot in gazebo
+    1. Go to workspace
+    2. Source the workspace
+    ```source devel/setup.bash```
+    3. Launch the simulation
+    ```roslaunch car_description sim.launch```
 
 # Package 
 At present the package contains URDF regarding the base of the bot
