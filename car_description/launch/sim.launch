@@ -3,5 +3,6 @@
     <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model base"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find car_description)/config/config.rviz"/> 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find car_description)/config/config.rviz"/>
+    <node pkg="tf" type="static_transform_publisher" name="cam_tf" args="0.175 0 0.025 -1.57 0 -1.57 base_link camera_link 1"/> 
 </launch>
